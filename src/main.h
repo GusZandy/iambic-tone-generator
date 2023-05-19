@@ -5,7 +5,7 @@
 
 static int speed = INITIAL_SPEED;
 
-void mem1(int speed);
+void encode(int speed, const char* data);
 
 
 #endif

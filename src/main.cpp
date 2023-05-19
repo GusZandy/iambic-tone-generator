@@ -9,6 +9,8 @@ void setup() {
   Input::setup();
   Output::setup();
 
+  Serial.begin(9600);
+
   delay(1000);
 }
 
@@ -26,31 +28,32 @@ void loop() {
   }
   if (Input::Button::getPressedMem1())
   {
-    mem1(speed);
+    encode(speed,  "CQ SES 8A05SILA 8A05SILA K");
+  }
+  if (Input::Button::getPressedMem2())
+  {
+    encode(speed,  "5NN TU");
+  }
+  if (Input::Button::getPressedMem3())
+  {
+    encode(speed,  "73 TU");
+  }
+  if (Input::Button::getPressedMem4())
+  {
+    // encode(speed,  "CQ SES 8A05SILA 8A05SILA K");
   }
 }
 
-void mem1(int speed) {
-  // CQ SES 8A05SILA K
-  c(speed);
-  q(speed);
-  spaceWord(speed);
-
-  s(speed);
-  e(speed);
-  s(speed);
-  spaceWord(speed);
-
-  eight(speed);
-  a(speed);
-  zero(speed);
-  five(speed);
-  s(speed);
-  i(speed);
-  l(speed);
-  a(speed);
-  spaceWord(speed);
-
-  k(speed);
+void encode(int speed, const char* data) {
+  for (size_t i = 0; i < strlen(data); i++)
+  {
+    if (data[i] == ' ')
+    {
+      spaceWord(speed);
+    } else {
+      letter(speed, data[i]);
+    }
+  }
+  
   spaceWord(speed);
 }
